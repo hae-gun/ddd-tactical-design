@@ -1,5 +1,6 @@
 package kitchenpos.products.application;
 
+import kitchenpos.products.tobe.exception.NegativePriceException;
 import kitchenpos.tobe.Fixtures;
 import kitchenpos.menus.application.InMemoryMenuRepository;
 import kitchenpos.menus.domain.Menu;
@@ -85,10 +86,8 @@ class ProductServiceTest {
     @NullSource
     @ParameterizedTest
     void changePrice(final BigDecimal price) {
-        final ProductId productId = productRepository.save(product("후라이드", 16_000L)).getProductId();
-        final Product expected = changePriceRequest(price);
-        assertThatThrownBy(() -> productService.changePrice(productId, expected))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> changePriceRequest(price))
+            .isInstanceOf(NegativePriceException.class);
     }
 
     @DisplayName("상품의 가격이 변경될 때 메뉴의 가격이 메뉴에 속한 상품 금액의 합보다 크면 메뉴가 숨겨진다.")
