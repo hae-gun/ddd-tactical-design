@@ -22,8 +22,7 @@ public class ProductName {
     }
 
     private void validate(String name, PurgomalumClient purgomalumClient) {
-        Objects.requireNonNull(name);
-        if (purgomalumClient.containsProfanity(name)) {
+        if (name == null || purgomalumClient.containsProfanity(name)) {
             throw new InvalidProductNameException("상품명에 비속어는 입력할 수 없습니다");
         }
     }
