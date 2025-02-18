@@ -1,5 +1,6 @@
 package kitchenpos.products.application;
 
+import kitchenpos.menus.domain.MenuProduct;
 import kitchenpos.products.tobe.exception.NegativePriceException;
 import kitchenpos.tobe.Fixtures;
 import kitchenpos.menus.application.InMemoryMenuRepository;

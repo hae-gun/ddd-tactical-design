@@ -48,11 +48,11 @@ public class ProductService {
             .orElseThrow(NoSuchElementException::new);
 
         product.setPrice(request.getPrice());
-
         final List<Menu> menus = menuRepository.findAllByProductId(productId.getId());
         for (final Menu menu : menus) {
             Price sum = new Price(BigDecimal.ZERO);
             for (final MenuProduct menuProduct : menu.getMenuProducts()) {
+                menuProduct.setProduct(Product.convertAsisDomain(product));
                 sum = sum.add(
                     menuProduct.getProduct()
                         .getPrice()

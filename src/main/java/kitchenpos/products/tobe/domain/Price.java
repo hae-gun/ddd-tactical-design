@@ -20,8 +20,7 @@ public class Price implements Comparable<Price> {
     }
 
     private void validation(BigDecimal price){
-        Objects.requireNonNull(price);
-        if(price.compareTo(new BigDecimal(0)) < 0){
+        if(price == null || price.compareTo(new BigDecimal(0)) < 0){
             throw new NegativePriceException("양수만 입력할 수 있습니다");
         }
     }
